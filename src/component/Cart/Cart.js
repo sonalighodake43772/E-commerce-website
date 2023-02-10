@@ -5,10 +5,13 @@ import CartContext from "../store/cart-context";
 
 const Cart = (props) => {
   const ctx = useContext(CartContext);
-  const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
 
-  const minusItem = (title) => {
-    ctx.removeCart(title);
+  const totalAmount = ctx.items.reduce((currNum, item) => {
+    return item.price * item.quantity + currNum;
+  }, 0);
+
+  const minusItem = (id) => {
+    ctx.removeCart(id);
   };
 
   const cartEle = (
@@ -21,7 +24,7 @@ const Cart = (props) => {
             <span className={classes.amount}>{ele.quantity}</span>
           </div>
           <div className={classes.actions}>
-            <button onClick={minusItem.bind(null, ele.title)}>Remove</button>
+            <button onClick={minusItem.bind(null, ele.id)}>Remove</button>
           </div>
         </li>
       ))}
@@ -35,7 +38,7 @@ const Cart = (props) => {
       </div>
       <h1 className="text-center">CART</h1>
       {cartEle}
-      <div className={classes.act}>{totalAmount}</div>
+      <div className={classes.act}>${totalAmount}</div>
     </Modal>
   );
 };
