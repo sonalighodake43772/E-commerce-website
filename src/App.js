@@ -6,6 +6,7 @@ import Cart from "./component/Cart/Cart";
 import { CartContextProvider } from "./component/store/cart-context";
 import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
+import Home from "./pages/Home"
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -24,7 +25,7 @@ function App() {
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Routes>
-      <Route path="/home"></Route>
+      <Route path="/home" element={<Home/>}/>
       <Route path="/store" element={  <Items /> }/>
        
     
