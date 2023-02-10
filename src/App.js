@@ -28,7 +28,7 @@ function App() {
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Routes>
       <Route path="/home" element={<Home/>}/>
-      <Route path="/store/:title" element={  <Products /> }/>
+     
       <Route path="/store" element={<Items/>}/>
          
         
