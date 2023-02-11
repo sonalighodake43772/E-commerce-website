@@ -102,13 +102,13 @@ const Login = () => {
             <button type="submit">{isLogin ? "login" : "Sign up"}</button>
           )}
           {isloading && <p>Sending request...</p>}
-          <button
+          {/* <button
             type="button"
             className={classes.toggle}
             onClick={switchAuthHandler}
           >
             {isLogin ? "Create new account" : "Login with existing account"}
-          </button>
+          </button> */}
         </div>
       </form>
     </section>
