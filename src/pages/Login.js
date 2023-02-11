@@ -1,7 +1,14 @@
 import { useState } from "react";
 import classes from "./Login.module.css";
+import AuthContext
+ from "../component/store/auth-context";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const logCtx = useContext(AuthContext);
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
@@ -53,7 +60,9 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        console.log(data.idToken);
+        logCtx.login(data.idToken);
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);
