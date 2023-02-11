@@ -58,14 +58,17 @@ function App() {
         </Route>
         <Route path="/profile">
           {!appCtx.isLoggedIn && <Profile />}
-          {appCtx.isLoggedIn && <Login />}
-        
+          {appCtx.isLoggedIn && <Redirect to="/Login" />}
         </Route>
         <Route path="/Login">
           <Login />
         </Route>
         <Route path="/Logout">
           <Login />
+        </Route>
+        <Route path="*">
+          {/* ( option 2)  */}
+          <Redirect to="/" />
         </Route>
       </Switch>
       </AuthContextProvider>
