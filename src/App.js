@@ -1,11 +1,12 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import NavBar from "./component/NavBar";
 import Items from "./component/Items";
 import Cart from "./component/Cart/Cart";
 import { CartContextProvider } from "./component/store/cart-context";
 import { AuthContextProvider } from "./component/store/auth-context";
 import { Redirect, Route, Switch } from "react-router-dom";
+import AuthContext from "./component/store/auth-context";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
@@ -15,6 +16,7 @@ import Profile from "./pages/Profile";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
+  const appCtx=useContext(AuthContext);
 
   const CartHandler = () => {
     setShowCart(true);
@@ -55,8 +57,11 @@ function App() {
           <Login />
         </Route>
         <Route path="/profile">
-          <Profile />
-        </Route><Route path="/Login">
+          {!appCtx.isLoggedIn && <Profile />}
+          {appCtx.isLoggedIn && <Login />}
+        
+        </Route>
+        <Route path="/Login">
           <Login />
         </Route>
         <Route path="/Logout">

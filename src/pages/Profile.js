@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import classes from "./Login.module.css";
 import AuthContext from "../component/store/auth-context";
+import { useHistory } from "react-router-dom";
 
 const Profile = () => {
   const profCtx = useContext(AuthContext);
+  const history = useHistory();
 
   const [newpassword, setNewPassword] = useState("");
 
@@ -14,7 +16,6 @@ const Profile = () => {
   const passwordChangeHandler = (e) => {
     e.preventDefault();
     console.log(newpassword);
-
 
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCENs_kbPG5MUBwwErYSVMnS9ZTwdVtRHs",
@@ -30,10 +31,11 @@ const Profile = () => {
         },
       }
     ).then((res) => {
-      //...
+      history.replace("/");
     });
+    profCtx.logout();
+    setNewPassword("");
   };
-  
 
   return (
     <section className={classes.auth}>
