@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Home from "./pages/Home"
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
+import Login from "./pages/Login";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -37,6 +38,7 @@ function App() {
     
       <Route path="/about" element={ <About />}/>
       <Route path="/contact" element={ <Contact />}/>
+      <Route path="/login" element={ <Login />}/>
         
       
       </Routes>
