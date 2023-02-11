@@ -57,6 +57,13 @@ const NavBar = (props) => {
           )}
           {isLoggedIn && (
             <li>
+              <NavLink activeClassName={classes.active} to="/profile">
+                Profile
+              </NavLink>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li>
               <NavLink
                 activeClassName={classes.active}
                 onClick={logoutHandlerfn}

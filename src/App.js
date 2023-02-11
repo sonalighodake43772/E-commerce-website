@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -51,6 +52,11 @@ function App() {
           <Contact  />
         </Route>
         <Route path="/Login">
+          <Login />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route><Route path="/Login">
           <Login />
         </Route>
         <Route path="/Logout">
