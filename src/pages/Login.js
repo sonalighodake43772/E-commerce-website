@@ -1,7 +1,6 @@
 import { useState } from "react";
 import classes from "./Login.module.css";
-import AuthContext
- from "../component/store/auth-context";
+import AuthContext from "../component/store/auth-context";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -60,9 +59,8 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data.idToken);
         logCtx.login(data.idToken);
-        history.replace("/");
+        history.replace("/store");
       })
       .catch((err) => {
         alert(err.message);

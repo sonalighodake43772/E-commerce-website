@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -35,8 +36,8 @@ function App() {
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
-        <Route exact path="/">
-          <Redirect to="/store" />
+      <Route exact path="/">
+          <HomePage />
         </Route>
         <Route path="/home">
           <Home />

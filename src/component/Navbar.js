@@ -1,21 +1,24 @@
 import { useContext } from "react";
 import CartContext from "./store/cart-context";
+import AuthContext from "./store/auth-context";
 import classes from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import AuthContext from "./store/auth-context";
 
 const NavBar = (props) => {
   const headCtx = useContext(CartContext);
-  const authctx = useContext(AuthContext);
-  const isLoggedIn = authctx.isLoggedIn;
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandlerfn = () => {
-    authctx.logout();
+  authCtx.logout();
+    // redirect to login page... (option 1)
   };
+
   let quantity = 0;
   headCtx.items.forEach((item) => {
     quantity = quantity + item.quantity;
   });
+
   return (
     <header className={classes.header}>
       <section>
