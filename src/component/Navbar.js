@@ -14,10 +14,11 @@ const NavBar = (props) => {
     // redirect to login page... (option 1)
   };
 
-  let quantity = 0;
-  headCtx.items.forEach((item) => {
-    quantity = quantity + item.quantity;
-  });
+  // let quantity = 0;
+  // headCtx.items.forEach((item) => {
+  //   quantity = quantity + item.quantity;
+  // });
+
 
   return (
     <header className={classes.header}>
@@ -79,7 +80,7 @@ const NavBar = (props) => {
           {isLoggedIn && (
             <button onClick={props.onshow} className={classes.button}>
               <span>Cart</span>
-              <span className={classes.badge}>{quantity}</span>
+              <span className={classes.badge}>{headCtx.productsQuantity}</span>
             </button>
           )}
         </ul>

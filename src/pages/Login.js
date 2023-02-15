@@ -59,7 +59,7 @@ const Login = () => {
         }
       })
       .then((data) => {
-        logCtx.login(data.idToken);
+        logCtx.login(data.idToken,data.email);
         history.replace("/store");
       })
       .catch((err) => {

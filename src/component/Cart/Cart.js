@@ -1,22 +1,46 @@
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
+import axios from "axios";
 import CartContext from "../store/cart-context";
 
 const Cart = (props) => {
-  const ctx = useContext(CartContext);
+  // const ctx = useContext(CartContext);
 
-  const totalAmount = ctx.items.reduce((currNum, item) => {
-    return item.price * item.quantity + currNum;
-  }, 0);
+  // const totalAmount = ctx.items.reduce((currNum, item) => {
+  //   return item.price * item.quantity + currNum;
+  // }, 0);
 
-  const minusItem = (id) => {
-    ctx.removeCart(id);
-  };
+  // const minusItem = (id) => {
+  //   ctx.removeCart(id);
+  // };
+  const crtCtx = useContext(CartContext);
+  //const authCtx = useContext(AuthContext);
+  const [list, setList] = useState([]);
+  let totalAmount = 0;
+
+  const removeCartHandler = (id) => {
+      crtCtx.removeItem(id);
+  }
+  const userEmailId = localStorage.getItem('email');
+  useEffect(() => {
+      const fetchCartItems = async() => {
+         const res = await axios.get(`https://crudcrud.com/api/1db9c854df554c80aefa870ee00e0f3d /cart${userEmailId}`)
+              crtCtx.items = res.data;
+              setList(res.data);
+      };
+      fetchCartItems();
+  },[userEmailId, crtCtx])
+
+
+  crtCtx.items.forEach(item => {
+    totalAmount = totalAmount + (Number(item.quantity) * item.price) ;
+});
+
 
   const cartEle = (
     <ul>
-      {ctx.items.map((ele) => (
+      {crtCtx.items.map((ele) => (
         <li key={ele.title} className={classes["cart-items"]}>
           <div className={classes.summary}>
             {ele.title}
@@ -24,7 +48,7 @@ const Cart = (props) => {
             <span className={classes.amount}>{ele.quantity}</span>
           </div>
           <div className={classes.actions}>
-            <button onClick={minusItem.bind(null, ele.id)}>Remove</button>
+            <button onClick={()=>removeCartHandler(ele.id)}>Remove</button>
           </div>
         </li>
       ))}
