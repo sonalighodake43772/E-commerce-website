@@ -1,17 +1,28 @@
 import "./App.css";
-import React, { useState } from "react";
-import NavBar from "./component/NavBar";
-import Items from "./component/Items";
-import Cart from "./component/Cart/Cart";
+import React, { useState,lazy,Suspense } from "react";
+// import NavBar from "./component/NavBar";
+// import Items from "./component/Items";
+// import Cart from "./component/Cart/Cart";
 import { Redirect, Route, Switch } from "react-router-dom";
-import About from "./pages/About";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Products from "./pages/Products";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
+// import About from "./pages/About";
+// import Home from "./pages/Home";
+// import Contact from "./pages/Contact";
+// import Products from "./pages/Products";
+// import Login from "./pages/Login";
+// import Profile from "./pages/Profile";
 import AuthContext from "./component/store/auth-context";
 import { useContext } from "react";
+const NavBar=lazy(()=>import("./component/NavBar"));
+const Items=lazy(()=>import("./component/Items"));
+const Cart=lazy(()=>import("./component/Cart/Cart"));
+const About=lazy(()=>import("./pages/About"));
+const Home=lazy(()=>import("./pages/Home"));
+const Contact=lazy(()=>import("./pages/Contact"));
+const Products=lazy(()=>import("./pages/Products"));
+const Login=lazy(()=>import("./pages/Login"));
+const Profile=lazy(()=>import("./pages/Profile"));
+
+
 
 
 function App() {
@@ -37,38 +48,38 @@ function App() {
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
       {isLoggedIn &&<Route exact path="/home">
-          <Home />
+         <Suspense> <Home /></Suspense>
         </Route>}
         {isLoggedIn && (
           <Route exact path="/store">
-            <Items />
+           <Suspense><Items /></Suspense> 
           </Route>
         )}
         {isLoggedIn && (
           <Route exact path="/store/:title">
-            <Products />
+           <Suspense><Products /></Suspense> 
           </Route>
         )}
         {isLoggedIn && (
           <Route exact path="/about">
-            <About />
+           <Suspense><About /></Suspense> 
           </Route>
         )}
         {isLoggedIn && (
           <Route exact path="/contact">
-            <Contact  />
+           <Suspense><Contact  /></Suspense> 
           </Route>
         )}
         <Route exact path="/Login">
-          {!isLoggedIn && <Login />}
+          {!isLoggedIn && <Suspense><Login /></Suspense>}
         </Route>
         {isLoggedIn && (
           <Route exact path="/profile">
-            <Profile />
+           <Suspense><Profile /></Suspense> 
           </Route>
         )}
         <Route path="/Logout">
-          <Login />
+         <Suspense><Login /></Suspense> 
         </Route>
         <Route path="*">
           {" "}
