@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import classes from "./Login.module.css";
-import AuthContext from "../component/store/auth-context";
+// import CartContext from "../component/store/cart-context";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../component/store/auth-context";
 
 const Profile = () => {
   const profCtx = useContext(AuthContext);
